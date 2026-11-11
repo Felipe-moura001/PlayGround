@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#101813" />
+  <title>Dead World — Ashfall County</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="world" aria-label="3D survival world"></canvas>
+    <div id="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">DW</span><div><b>DEAD WORLD</b><small>ASHFALL COUNTY · DAY <span id="day">01</span></small></div></div>
+      <div class="clock"><span class="sun">◷</span><span id="clock">07:20</span><i id="weather">CLEAR</i></div>
+      <button class="icon-btn map-btn" id="map-button" title="Map">⌖</button>
+    </header>
+    <section class="status-panel glass">
+      <div class="player-label"><span class="pulse"></span> SURVIVOR <span class="condition" id="condition">STEADY</span></div>
+      <div class="bar-row"><span>♥</span><div class="meter"><i id="health-fill" class="health"></i></div><b id="health-value">100</b></div>
+      <div class="bar-row"><span>◉</span><div class="meter"><i id="stamina-fill" class="stamina"></i></div><b id="stamina-value">100</b></div>
+      <div class="needs"><span>HUNGER <b id="hunger">12</b></span><span>THIRST <b id="thirst">18</b></span><span>TEMP <b id="temp">18°</b></span></div>
+    </section>
+    <div class="objective glass"><span class="pin">⌖</span><div><small>FIELD NOTE</small><b id="objective">Search the quiet block for supplies.</b></div></div>
+    <div id="toast" class="toast"></div>
+    <div class="interaction-hint" id="interaction-hint"></div>
+    <section class="quickbar glass" id="quickbar">
+      <button class="quick-slot active" data-slot="0"><span>1</span><b>▰</b><small>PIPE</small></button>
+      <button class="quick-slot" data-slot="1"><span>2</span><b>◒</b><small>FOOD</small></button>
+      <button class="quick-slot" data-slot="2"><span>3</span><b>◉</b><small>WATER</small></button>
+      <button class="quick-slot" data-slot="3"><span>4</span><b>✚</b><small>BANDAGE</small></button>
+      <button class="quick-slot pack" id="inventory-button"><b>▤</b><small>PACK</small></button>
+    </section>
+    <div class="controls">
+      <div class="move-pad" id="move-pad"><div class="stick-ring"><div id="stick"></div></div><small>MOVE</small></div>
+      <div class="action-pad">
+        <button id="sneak-button" class="action small-action">◌<small>SNEAK</small></button>
+        <button id="run-button" class="action small-action">»<small>SPRINT</small></button>
+        <button id="interact-button" class="action interact-action">↗<small>USE</small></button>
+        <button id="attack-button" class="action attack-action">✕<small>ATTACK</small></button>
+      </div>
+    </div>
+    <div id="overlay" class="overlay hidden"><div class="panel glass" id="panel"></div></div>
+    <div class="bottom-note">WASD / ARROWS MOVE <span>·</span> SPACE ATTACK <span>·</span> E INTERACT <span>·</span> I INVENTORY <span>·</span> M MAP</div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
