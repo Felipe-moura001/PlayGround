@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#101a17">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%231a241e'/%3E%3Cpath d='M13 48V16h9l10 17 10-17h9v32h-9V31L32 46 22 31v17z' fill='%23c5d293'/%3E%3C/svg%3E">
+  <title>Wild Frontier — The Long Quiet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" aria-label="Wild Frontier survival game">
+    <canvas id="world"></canvas>
+    <div class="film-grain"></div><div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Wild Frontier home"><span class="brand-mark">W</span><span>WILD<span class="brand-light">FRONTIER</span><small>FIELD EDITION&nbsp; / &nbsp;01</small></span></a>
+      <div class="region"><i></i><div><b id="regionName">THE HUSHWOOD</b><small id="coords">N 42° 18′ &nbsp; W 73° 04′</small></div></div>
+      <div class="time"><span id="weatherIcon">☼</span><div><b id="clock">08:42</b><small id="weatherLabel">CLEAR · 14°C</small></div></div>
+      <button class="icon-btn map-btn" id="mapButton" aria-label="Open map">⌖<span>MAP</span></button>
+      <button class="icon-btn" id="settingsButton" aria-label="Settings">⚙</button>
+    </header>
+    <section class="survival-panel">
+      <div class="panel-kicker">CONDITION <span>FIELD STATUS</span></div>
+      <div class="meter-row"><span class="meter-icon heart">♥</span><span class="meter-label">HEALTH</span><div class="meter"><i id="healthBar" style="width:94%"></i></div><b id="healthValue">94</b></div>
+      <div class="meter-row"><span class="meter-icon">◇</span><span class="meter-label">HYDRATION</span><div class="meter"><i id="waterBar" class="water" style="width:78%"></i></div><b id="waterValue">78</b></div>
+      <div class="meter-row"><span class="meter-icon">◒</span><span class="meter-label">NOURISHMENT</span><div class="meter"><i id="foodBar" class="food" style="width:66%"></i></div><b id="foodValue">66</b></div>
+      <div class="meter-row stamina-row"><span class="meter-icon">ϟ</span><span class="meter-label">STAMINA</span><div class="meter"><i id="staminaBar" class="stamina" style="width:100%"></i></div><b id="staminaValue">100</b></div>
+      <div class="condition-foot"><span><i class="tiny-dot"></i> TEMP <b id="tempValue">36.6°</b></span><span>DRY <b id="wetValue">0%</b></span></div>
+    </section>
+    <div class="objective"><span class="objective-icon">✳</span><div><small>FIELD NOTE 01 &nbsp;·&nbsp; DAY 01</small><b id="objectiveText">Find shelter before nightfall</b></div><button id="objectiveToggle" aria-label="Hide field note">−</button></div>
+    <div class="compass" id="compass"><span>W</span><i></i><b>N</b><i></i><span>E</span><small>NE</small></div>
+    <div class="center-reticle"><i></i><i></i><i></i><i></i><b></b></div>
+    <div class="prompt" id="prompt"><span class="keycap">E</span><span id="promptText">SEARCH SUPPLY CRATE</span></div>
+    <div class="toast" id="toast"><span>✦</span><b id="toastText">The woods are quiet.</b></div>
+    <div class="bottom-left"><span class="sound-icon">◖))</span><span id="soundText">WIND IN THE CANOPY</span></div>
+    <div class="bottom-right"><div class="weapon"><span class="weapon-icon">⌁</span><div><b id="weaponName">HUNTER'S .22</b><small>FIELD-MADE · WORN</small></div><strong id="ammo">06 <i>/ 18</i></strong></div><div class="quickbar"><button class="quick active" data-slot="1"><span>1</span>✣</button><button class="quick" data-slot="2"><span>2</span>◉</button><button class="quick" data-slot="3"><span>3</span>⌁</button><button class="quick" data-slot="4"><span>4</span>▤</button><button class="bag-button" id="inventoryButton">▦ <span>PACK</span><kbd>TAB</kbd></button></div></div>
+    <div class="mobile-controls" id="mobileControls"><div class="joystick" id="joystick"><div class="joy-knob"></div></div><div class="touch-look" id="touchLook"></div><button class="touch-action" id="touchJump">↑</button><button class="touch-action crouch" id="touchCrouch">⌄</button><button class="touch-action run" id="touchRun">»</button></div>
+    <div class="overlay" id="inventoryOverlay"><div class="modal inventory-modal"><div class="modal-head"><div><small>FIELD KIT &nbsp; / &nbsp; PERSONAL</small><h2>Pack & pockets</h2></div><button class="close" data-close>×</button></div><div class="inventory-layout"><div><div class="section-label">CARRIED <span id="weight">6.4 / 24 KG</span></div><div class="slot-grid" id="inventoryGrid"></div><div class="inventory-note">Drag items between slots. Select an item to inspect or use.</div></div><div class="item-inspect"><div class="item-art" id="itemArt">✣</div><small id="itemType">FIELD PROVISIONS</small><h3 id="itemName">Wild berries</h3><p id="itemDescription">A handful of tart forest berries. Restores a little nourishment, but best eaten soon.</p><div class="item-stats"><span>CONDITION <b id="itemCondition">GOOD</b></span><span>WEIGHT <b id="itemWeight">0.2 KG</b></span></div><button class="primary-button" id="useItem">USE ITEM <span>↗</span></button><button class="secondary-button" id="dropItem">DROP ITEM</button></div></div><div class="modal-foot"><span>ESC / TAB TO RETURN</span><span>PACK WEIGHT AFFECTS STAMINA</span></div></div></div>
+    <div class="overlay" id="mapOverlay"><div class="modal map-modal"><div class="modal-head"><div><small>FIELD MAP &nbsp; / &nbsp; HAND-DRAWN</small><h2>Northwood county</h2></div><button class="close" data-close>×</button></div><div class="map-content"><canvas id="mapCanvas" width="900" height="570"></canvas><div class="map-legend"><span><i class="legend-dot player-dot"></i> YOU ARE HERE</span><span><i class="legend-dot shelter-dot"></i> WARM SHELTER</span><span><i class="legend-dot loot-dot"></i> LAST KNOWN SUPPLIES</span><small>Some paths have not yet been walked.</small></div></div><div class="modal-foot"><span>USE SCROLL TO CHANGE SCALE</span><span>MARKERS ARE SAVED LOCALLY</span></div></div></div>
+    <div class="overlay" id="settingsOverlay"><div class="modal settings-modal"><div class="modal-head"><div><small>OPTIONS &nbsp; / &nbsp; FIELD SETTINGS</small><h2>Make camp</h2></div><button class="close" data-close>×</button></div><label class="setting-row">PIXEL SCALE <select id="pixelSetting"><option value="1">High detail</option><option value="1.5">Balanced</option><option value="2">Retro</option></select></label><label class="setting-row">LOOK SENSITIVITY <input id="sensitivitySetting" type="range" min="0.0007" max="0.004" step="0.0001" value="0.002"></label><label class="setting-row">AMBIENT SOUND <input id="soundSetting" type="range" min="0" max="1" step="0.05" value="0.55"></label><div class="settings-actions"><button class="secondary-button" id="resetButton">RESET FIELD SAVE</button><button class="primary-button" data-close>BACK TO WILDERNESS</button></div><div class="inventory-note">WASD move · Shift run · C crouch · Space jump · E interact · F forage · R reload · Q eat · M map · Tab pack</div></div></div>
+    <div class="intro-card" id="intro"><span>CHAPTER 01 &nbsp; / &nbsp; THE LONG QUIET</span><h1>THE WOODS<br>REMEMBER.</h1><p>Day 01. The old county road ends here. Find the ranger cabin, gather what the forest offers, and make it through your first night.</p><button id="beginButton">STEP INTO THE WILDERNESS <b>↗</b></button><small>W A S D &nbsp; MOVE &nbsp;&nbsp; MOUSE &nbsp; LOOK &nbsp;&nbsp; E &nbsp; INTERACT</small></div>
+    <div class="pause-badge" id="pauseBadge">PAUSED <span>CLICK TO RETURN</span></div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
